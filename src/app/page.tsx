@@ -17,7 +17,12 @@ function Cabecalho() {
 	);
 }
 
-class Tarefa extends React.Component {
+interface TarefaProps {
+  titulo: string;
+	concluido?: boolean;
+}
+
+class Tarefa extends React.Component<TarefaProps> {
 	render(): React.ReactNode {
 		return (
 			<div className="p-3 mb-3 rounded-lg shadow-md bg-gray-400">
