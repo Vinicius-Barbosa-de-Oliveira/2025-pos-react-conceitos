@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 const Titulo = () => (
@@ -23,11 +25,14 @@ interface TarefaProps {
 }
 
 class Tarefa extends React.Component<TarefaProps> {
+	
 	render(): React.ReactNode {
+		const classe = `p-3 mb-3 rounded-lg shadow-md ${this.props.concluido ? "bg-gray-800" : "bg-gray-400"}`;
+
 		return (
-			<div className="p-3 mb-3 rounded-lg shadow-md bg-gray-400">
+			<div className={classe}>
 				<h3 className="text-xl font-bold">{this.props.titulo}</h3>
-				<p className="text-sm">Pendente</p>
+				<p className="text-sm">{this.props.concluido ? "Concluída" : "Pendente"}</p>
 			</div>
 		);
 	}
@@ -43,8 +48,8 @@ const Home = () => {
 	return (
 		<div className="container mx-auto p-4">
 			<Cabecalho />
-			<Tarefa titulo={tarefas[0].title} />
-			<Tarefa titulo={tarefas[1].title} />
+			<Tarefa titulo={tarefas[0].title} concluido={tarefas[0].completed} />
+			<Tarefa titulo={tarefas[1].title} concluido={tarefas[1].completed} />
 		</div>
 	);
 };
