@@ -19,25 +19,37 @@ function Cabecalho() {
 	);
 }
 
-interface TarefaProps {
-	titulo: string;
-	concluido?: boolean;
+interface TarefaInterface {
+	id: number;
+	title: string;
+	completed: boolean;
+}
+
+interface TareafasProps {
+	dados: Array<TarefaInterface>;
 }
 
 const Tarefa: React.FC<TarefaProps> = ({ titulo, concluido }) => {
+	const [estaConcluido, setEstaConcluido] = useState(concluido);
+
 	const classe = `p-3 mb-3 rounded-lg shadow-md hover:cursor-pointer hover:border ${
-		concluido
+		estaConcluido
 			? "bg-gray-800 hover:border-gray-800"
 			: "bg-gray-400 hover:border-gray-400"
 	}`;
 
+	const escutarClique = () => {
+		console.log(`A tarefa '${titulo}' foi clicada!`);
+		setEstaConcluido(!estaConcluido);
+	}
+
 	return (
 		<div
 			className={classe}
-			onClick={() => console.log(`A tarefa '${titulo}' foi clicada!`)}
+			onClick={() => escutarClique()}
 		>
 			<h3 className="text-xl font-bold">{titulo}</h3>
-			<p className="text-sm">{concluido ? "Concluída" : "Pendente"}</p>
+			<p className="text-sm">{estaConcluido ? "Concluída" : "Pendente"}</p>
 		</div>
 	);
 };
@@ -52,8 +64,7 @@ const Home = () => {
 	return (
 		<div className="container mx-auto p-4">
 			<Cabecalho />
-			<Tarefa titulo={tarefas[0].title} concluido={tarefas[0].completed} />
-			<Tarefa titulo={tarefas[1].title} concluido={tarefas[1].completed} />
+			<Tarefas dados={tarefas} />
 		</div>
 	);
 };
