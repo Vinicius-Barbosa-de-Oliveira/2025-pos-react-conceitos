@@ -4,18 +4,33 @@ const Titulo = () => <h1>React - Conceitos básicos</h1>;
 
 const SubTitulo = () => (<h2>Lista de tarefas</h2>);
 
-const tarefa = () => (<h3>Projeto PIU</h3>);
+function Cabecalho() {
+	return (
+		<>
+			<Titulo />
+			<SubTitulo />
+		</>
+	);
+}
 
-const Cabecalho = () => (
-  <>
-    <Titulo />
-    <SubTitulo />
-    <tarefa />
-  </>
-);
+class Tarefa extends React.Component {
+	render(): React.ReactNode {
+		return (
+			<div>
+				<h3>Codar e codar durante 2025</h3>
+				<p>Pendente</p>
+			</div>
+		);
+	}
+}
 
 const Home = () => {
-  return <Cabecalho />;
-}
+	return (
+		<>
+			<Cabecalho />
+			<Tarefa />
+		</>
+	);
+};
 
 export default Home;
